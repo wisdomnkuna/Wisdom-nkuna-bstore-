@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BStore</title>
+    
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=League+Spartan:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&family=Varela+Round&display=swap" rel="stylesheet">
+    
+
+
+    
+     <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+  
+  <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-container">
+            <!-- Using a placeholder image, replace with your own small image -->
+            <img src="logo/1747689935226.png" alt="Loading..." class="preloader-image">
+            <div class="circle-loader"></div>
+        </div>
+    </div>
+  
+   <!-- Sidebar HTML - Add this to your body where you want the sidebar -->
+   <button class="simple-toggle-btn" id="toggle-sidebar">
+     <i class="fas fa-bars" id="toggle-icon"></i>
+   </button>
+   
+   <div class="simple-sidebar" id="sidebar">
+     <div class="sidebar-header">
+       <div class="logo" onclick="handleProfileNavigation()">
+         <img src="sb/20250527_011026.png" alt="">
+       </div>
+       <h2 id="user-name2">sign in</h2>
+     </div>
+   
+     <ul class="nav-links">
+       <li class="nav-item">
+         <a href="#" onclick="showPage('home-page')">
+           <i class="fa-solid fa-house"></i>
+           <span class="link-text">Home</span>
+         </a>
+       </li>
+       <li class="nav-item">
+         <a href="#home3">
+           <i class="fas fa-box"></i>
+           <span class="link-text">products</span>
+         </a>
+       </li>
+       <li class="nav-item">
+         <a href="#" onclick="showPage('favorites-page')">
+           <i class="fa-solid fa-heart"></i>
+           <span class="link-text">favorites</span>
+         </a>
+       </li>
+       <li class="nav-item">
+         <a href="#" onclick="showPage('cart-page')">
+           <i class="fa-solid fa-cart-shopping"></i>
+           <span class="link-text">cart</span>
+         </a>
+       </li>
+       <li class="nav-item">
+         <a href="#backToTopBtn">
+           <i class="fa-solid fa-user-group"></i>
+           <span class="link-text">about</span>
+         </a>
+       </li>
+       <li class="nav-item2">
+         <a href="index.html">
+                <button id="logout-btn" onclick="signOut()"><p>sign out</p></button></a>
+       </li>
+     </ul>
+   </div>
+   
+   <div class="simple-overlay" id="overlay">
+     
+   </div>
+    
+  
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+          
+          <div class="c2">
+          
+          <div class="lg">
+            <img src="logo/1747689935226.png" alt="">
+          </div>
+          <div class="c1">
+            <div class="lg1">
+              
+            <div class="logo" onclick="showPage('home-page')">store</div>
+            
+            <div class="user-actions" id="user-auth-actions">
+              <button onclick="showPage('login-page')">Sign In</button>
+            </div>
+            
+            <div class="menu">
+              
+            </div>
+            
+            </div>
+            
+          
+             <div class="nav-actions">
+              
+                <div class="nav-icon" onclick="showPage('favorites-page')">
+                    <img src="nav/1747590094000.png" alt="">
+                    <span class="badge" id="favorites-count">0</span>
+                </div>
+                <div class="nav-icon" onclick="showPage('cart-page')">
+                    <img src="nav/1747590046116.png" alt="">
+                    <span class="badge" id="cart-count">0</span>
+                </div>
+                
+                <div class="nav-icon" onclick="handleProfileNavigation()">
+                  <img src="nav/1747590009377.png" alt="">
+                </div>
+                
+                <div class="nav-icon">
+                  
+                </div>
+                
+                <div class="nav-icon">
+                
+                </div>
+                
+                <div class="search-bar">
+                  <input type="text" id="search-input" placeholder="Search for products...">
+                  <button onclick="searchProducts()">
+                    <img src="nav/1747589936139.png" alt="search">
+                  </button>
+                </div>
+                
+              
+                 
+                
+                
+                
+            </div>
+          
+            
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    
+    
+    <main class="container">
+        <!-- Home Page with Products -->
+       
+        
+        <div id="home-page">
+          
+    <div class="home1">
+     
+     
+       <div class="slideshow-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+            <!-- Clone of last slide (for seamless backward loop) -->
+            <div class="slide clone">
+                <img src="SmartSelect_20250522-213808_Sketch.jpg" alt="Slide 5 Clone">
+            </div>
+            
+            <!-- Originals -->
+            <div class="slide" data-slide="5">
+                <img src="ads/20250529_200437.png" alt="Slide 1">
+            </div>
+        
+            <div class="slide active" data-slide="0">
+                <img src="ads/20250529_200703.png" alt="Slide 2">
+                <div class="slide-caption"><h1>mobile</h1></div>
+            </div>
+        
+            <div class="slide" data-slide="1">
+                <img src="ads/20250529_200542.png" alt="Slide 3">
+                <div class="slide-caption"><h1>Gaming</h1></div>
+            </div>
+        
+            <div class="slide" data-slide="2">
+                <img src="ads/20250529_200519.png" alt="Slide 4">
+                <div class="slide-caption"><h1>Audio & sound</h1></div>
+            </div>
+            
+            <div class="slide" data-slide="3">
+                <img src="ads/20250529_200900.png" alt="Slide 5">
+                <div class="slide-caption"><h1>shop now <br>new products</h1></div>
+            </div>
+            
+            <!-- Clone of first slide (for seamless forward loop) -->
+            <div class="slide clone">
+              
+                <img src="" alt="Slide 1 Clone">
+              
+            </div>
+        </div>
+      
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" id="prevBtn"><ion-icon name="play-skip-back"></ion-icon></button>
+        <button class="control-btn" id="pauseBtn"><ion-icon name="pause"></ion-icon></button>
+        <button class="control-btn" id="nextBtn"><ion-icon name="play-skip-forward"></ion-icon></button>
+    </div>
+
+    <div class="indicator-container" id="indicators"></div>
+     
+     
+     
+     
+     
+    </div>
+          <div id="home3">
+            
+            <div class="p1">
+              <img src="product/1747253227173.png" alt="">
+            </div>
+           <h1 id="myH1">Featured Products</h1>
+          <div class="products-container">
+            
+            
+            <!-- Right Arrow -->
+            <div class="scroll-arrow scroll-right" onclick="scrollRight()">
+            <ion-icon name="play-skip-forward"></ion-icon>
+              </div>
+            
+            <div class="products-grid" id="products-container">
+              
+                <!-- Products will be loaded here via JavaScript -->
+                
+            </div>
+            </div>
+            
+            
+            
+          </div>
+            
+            
+            <div class="about">
+              <img src="dev/1747345407203.png" alt="">
+              <h1 id="myH1">Developer</h1>
+             
+             
+  
+
+             
+             <div class="card3">
+               <div class="blob blob-1"></div>
+               <div class="blob blob-2"></div>
+             
+               <div class="profile5-image">
+                 <i class="fas fa-user"></i>
+               </div>
+             
+               <div class="content1">
+                 <h2 class="name1">wisdom nkuna</h2>
+                 <p class="title1">Frontend Developer</p>
+             
+                 <p class="bio">Passionate about creating elegant solutions to complex problems. Experienced in web development with a focus on performance and user experience.</p>
+             
+                 <div class="stats">
+                   <div class="stat-item">
+                     <div class="stat-value">4+</div>
+                     <div class="stat-label">Years Exp</div>
+                   </div>
+                   <div class="stat-item">
+                     <div class="stat-value">17+</div>
+                     <div class="stat-label">Projects</div>
+                   </div>
+                   <div class="stat-item">
+                     <div class="stat-value">10+</div>
+                     <div class="stat-label">Clients</div>
+                   </div>
+                 </div>
+             
+                 <div class="contact-info">
+                   <div class="contact-item">
+                     <i class="fas fa-envelope"></i>
+                     <span class="contact-text">wisdomnkuna00@Gmail.com</span>
+                   </div>
+                   <div class="contact-item">
+                     <i class="fas fa-phone"></i>
+                     <span class="contact-text">+27 (074) 838-5875</span>
+                   </div>
+                 </div>
+             
+                 <div class="social2-links">
+                   <a href="#" class="social2-link">
+                     <i class="fab fa-github"></i>
+                   </a>
+                   <a href="#" class="social2-link">
+                     <i class="fab fa-linkedin"></i>
+                   </a>
+             
+                 </div>
+               </div>
+             </div>
+             
+             
+             
+            </div>
+            
+            <!-- Demo Content Area -->
+    
+    
+    <!-- Footer Start -->
+    <footer>
+        <div class="footer-top" id="backToTopBtn">
+            <span>Back to top</span>
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-column" id="aboutAppTrigger">
+          <img src="abt/20250520_185048.png" alt="About Icon">
+          
+          <h2>About App</h2>
+          
+          </div>
+            
+            <!-- Modal Overlay -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal-container">
+            <button class="close-button" id="closeModal">&times;</button>
+            <div class="app-logo">
+                <img src="logo/1747689935226.png" alt="App Logo">
+            </div>
+            <div class="modal-header">
+                <h3 class="modal-title">About Our<br> E-Commerce App</h3>
+            </div>
+            
+            <div class="app-description">
+                <p>Welcome to our premium e-commerce platform designed to deliver an exceptional shopping experience. Our app connects you with thousands of products from trusted vendors around the world.</p>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>Sign in with Google account.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>search products that are available in stock or choose the category of the product type and add to cart or favorite.</div>
+                    </div>
+                  
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>purchase the products by going throuh the checkout steps, after placing your oder, you can view your order history, write a review or rate your order.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>Secure payment processing with multiple payment options.</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>Real-time order tracking and delivery updates</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>Personalized recommendations based on your preferences</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>24/7 customer support for all your shopping needs</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>Easy returns and refund policy</div>
+                    </div>
+                </div>
+                
+                <p>Our mission is to make online shopping simple, secure, and enjoyable. We're constantly improving our platform based on customer feedback to provide the best possible experience.</p>
+            </div>
+            
+            <div class="app-version">
+                <p>Version 2.0 | Released May 2025</p>
+                
+            </div>
+        </div>
+    </div>
+            
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p style="color: #ddd; margin-bottom: 15px; font-size: 14px;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                
+                <h3 style="margin-top: 30px;">Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                      <i class='fab fa-facebook-f'></i>
+                    </a>
+                    <a href="#" aria-label="twitter">
+                      <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="linkedin">
+                     <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" aria-label="github">
+                      <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+                
+                <div class="payment-methods">
+                    <span>Visa</span>
+                    <span>Mastercard</span>
+                    <span>PayPal</span>
+                    <span>Apple Pay</span>
+                    <span>Google Pay</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bstore. All rights reserved.</p>
+            <div>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-text">
+          <i class='fas fa-cookie-bite' style='font-size:48px;color: #bcbcbc'></i>
+            <br>
+            <p>We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept", you consent to our use of cookies.</p>
+        </div>
+        <div class="cookie-buttons">
+            <a href="#" onclick="showPage('home-page')">
+            <button class="reject-cookies" id="rejectCookies">Reject</button></a>
+            <a href="#" onclick="showPage('home-page')">
+            <button class="accept-cookies" id="acceptCookies">Accept</button></a>
+        </div>
+    </div>
+    
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        ↑
+    </div>
+    
+    
+            
+            
+    </div>
+        
+        
+
+        <!-- Shopping Cart Page -->
+        <div id="cart-page" class="cart-page">
+            <h1>Your Shopping Cart</h1>
+            <div id="cart-items-container">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-summary" id="cart-summary">
+                <!-- Cart summary will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Checkout Page -->
+        <div id="checkout-page" class="checkout-page">
+            <div class="checkout-steps">
+                <div class="step active" id="step-address">Address</div>
+                <div class="step" id="step-review">Review</div>
+                <div class="step" id="step-payment">Payment</div>
+                <div class="step" id="step-confirm">Confirmation</div>
+            </div>
+
+            <!-- Address Form -->
+            <div id="address-form" class="checkout-form">
+                <h2>Shipping Address</h2>
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="postal-code">Postal Code</label>
+                    <input type="text" id="postal-code" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <button class="btn btn-primary" onclick="goToReview()">Continue to Review</button>
+            </div>
+
+            <!-- Product Review -->
+            <div id="review-form" class="checkout-form" style="display: none;">
+                <h2>Review Your Products</h2>
+                <div id="review-items-container">
+                    <!-- Review items will be loaded here -->
+                </div>
+                <div class="btn2">
+                <button class="btn btn-primary" onclick="goToPayment()">Go to Payment</button>
+                <button class="btn btn-secondary" onclick="goBackToAddress()">Back to Address</button>
+                </div>
+            </div>
+
+            <!-- Payment Options -->
+            <div id="payment-options" class="checkout-form" style="display: none;">
+                <h2>Payment Method</h2>
+                <div class="payment-options">
+                    <div class="payment-option" id="cod-option" onclick="selectPaymentMethod('cod')">
+                      <img src="pay/1747600425286.png" alt="">
+                  
+                        <h3>Cash on Delivery</h3>
+                        <p>Pay when you receive your order</p>
+                    </div>
+                    <div class="payment-option" id="card-option" onclick="selectPaymentMethod('card')">
+                        <img src="pay/1747600495389.png" alt="">
+                        <h3>Credit/Debit Card</h3>
+                        <p>Pay securely with your card</p>
+                    </div>
+                </div>
+
+                <!-- Credit Card Form -->
+                <div id="card-payment-form" class="payment-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" required>
+                    </div>
+                    <div class="btn2">
+                    <button class="btn btn-primary" onclick="processCardPayment()">Pay Now</button>
+                    <button class="btn btn-secondary" onclick="goBackToReview()">Back to Review</button></div>
+                </div>
+
+                <!-- Cash on Delivery Form -->
+                <div id="cod-payment-form" class="payment-form" style="display: none;">
+                    <p>You will pay for your order when it is delivered to your address.</p>
+                   <div class="btn2">
+                    <button class="btn btn-primary" onclick="processCodPayment()">Place Your Order</button>
+                    <button class="btn btn-secondary" onclick="goBackToReview()">Back to Review</button></div>
+                </div>
+            </div>
+
+            <!-- Order Confirmation -->
+            <div id="order-confirmation" class="checkout-form" style="display: none;">
+                <h2>Order Confirmation</h2>
+                <div id="order-details">
+                    <!-- Order details will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- User Profile Page -->
+        <div id="profile-page" class="profile-page">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img id="user-avatar" src="https://via.placeholder.com/80" alt="User Avatar">
+                </div>
+                <div class="profile-info">
+                    <h2 id="user-name">sign in</h2>
+                    <p id="user-email">user email</p>
+                </div>
+            </div>
+            <div class="profile-nav">
+                <button id="nav-orders" class="active" onclick="showProfileTab('orders')"><i class='fas fa-box'></i><p>My Orders</p></button>
+                <button id="nav-favorites" onclick="showProfileTab('favorites')"><i class="fa fa-heart"></i><p>Favorites</p></button>
+                <button id="nav-settings" onclick="showProfileTab('settings')"><ion-icon name="cog"></ion-icon><p>Settings</p></button>
+                <button id="nav-reviews" onclick="showProfileTab('reviews')"><i class='fas fa-star'></i><p>My Reviews</p></button>
+                <a href="index.html">
+                <button id="logout-btn" onclick="signOut()"><ion-icon name="log-out"></ion-icon><p>Log Out</p></button></a>
+            </div>
+            <div class="profile-content">
+                <div id="orders-tab">
+                    <h2>Your Orders</h2>
+                    <div id="orders-container">
+                        <!-- Orders will be loaded here -->
+                    </div>
+                </div>
+                <div id="favorites-tab" style="display: none;">
+                    <h2>Your Favorites</h2>
+                    <div id="favorites-container">
+                        <!-- Favorites will be loaded here -->
+                    </div>
+                </div>
+                <div id="settings-tab" style="display: none;">
+                    <h2>Account Settings</h2>
+                    <div class="form-group">
+                        <label for="settings-name">Name</label>
+                        <input type="text" id="settings-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-email">Email</label>
+                        <input type="email" id="settings-email" disabled>
+                    </div>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+                <div id="reviews-tab" style="display: none;">
+                    <h2>Your Product Reviews</h2>
+                    <div id="user-reviews-container">
+                        <!-- User reviews will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div id="favorites-page" class="favorites-page">
+            <h1>Your Favorites</h1>
+            <div id="favorites-items-container" class="products-grid">
+                <!-- Favorites will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Authentication Pages -->
+        <div id="login-page" class="auth-page" style="display: none;">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Sign In to Bstore</h2>
+                </div>
+                
+                <div class="s1">
+                  <div class="s2">
+                    <img src="logo/1747689935226.png" alt="">
+                  </div>
+                  <div class="s3">
+                    <div class="s31"></div>
+                    <div class="s32"><h1>store</h1></div>
+                  </div>
+                </div>
+                
+                <div class="divider">
+                        <span><h2>Sign in</h2></span>
+                    </div>
+                
+                <div class="auth-content">
+                    <div class="social-login">
+                        <button id="google-login" class="google-btn">
+                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                                <path fill="none" d="M0 0h48v48H0z"/>
+                            </svg>
+                            Sign in with Google
+                        </button>
+                    </div>
+                    
+
+                    <div class="s4"><p>Continue to the  shopping page</p><b onclick="showPage('home-page')">Home</b></div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="register-page" class="auth-page" style="display: none;">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Create an Account</h2>
+                </div>
+                <div class="auth-content">
+                    <div class="social-login">
+                        <button id="google-register" class="google-btn">
+                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                                <path fill="none" d="M0 0h48v48H0z"/>
+                            </svg>
+                            Sign up with Google
+                        </button>
+                    </div>
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" required>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="registerUser()">Create Account</button>
+                    <p style="text-align: center; margin-top: 20px;">
+                        Already have an account? <a href="#" onclick="showPage('login-page')">Sign in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Review Modal -->
+        <div id="product-review-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Write a Review</h2>
+                    <span class="close-modal" onclick="closeReviewModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="review-product-info">
+                        <!-- Product info will be loaded here -->
+                    </div>
+                    <div class="form-group">
+                        <label for="review-title">Review Title</label>
+                        <input type="text" id="review-title" placeholder="Summarize your experience" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rating">Rating</label>
+                        <div class="rating-input">
+                            <span class="rating-star" data-rating="1" onclick="setRating(1)">★</span>
+                            <span class="rating-star" data-rating="2" onclick="setRating(2)">★</span>
+                            <span class="rating-star" data-rating="3" onclick="setRating(3)">★</span>
+                            <span class="rating-star" data-rating="4" onclick="setRating(4)">★</span>
+                            <span class="rating-star" data-rating="5" onclick="setRating(5)">★</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-content">Your Review</label>
+                        <textarea id="review-content" rows="5" placeholder="What did you like or dislike about this product?" required></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="submitProductReview()">Submit Review</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+    <!-- Order Success Popup -->
+    <div class="overlay" id="order-success-overlay">
+        <div class="popup">
+            <i class="material-icons">check_circle</i>
+            <h2>Order Placed Successfully!</h2>
+            <p>Your order has been placed and will be processed soon. Thank you for shopping with us!</p>
+            <a href="index.html">
+            <button class="btn btn-primary" onclick="closeOrderSuccess()">Continue Shopping</button></a>
+        </div>
+    </div>
+    
+    <div id="imageModal" class="modal">
+      <span class="close-btn">&times;</span>
+      <img class="modal-content2" id="zoomedImg">
+    </div>
+
+    <script src="Main.js"></script>
+</body>
+</html>
+
+    
+    
+    
+
